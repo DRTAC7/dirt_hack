@@ -1,0 +1,51 @@
+//mouse_arp by dirt_hack
+
+setcpm(120)
+
+let chords = ("{E5 B5 G5 D5}%7")
+let scales = ("e:minor")
+
+let x = mousey.range(2, 4)
+let y = sine.seg(0.5).range(1,10)
+let z = mousex.range(0, 0.90)
+let s1 = ("{1 1 1 0 1 1 0 1 0 1 1 0}%4")
+let s2 = ("{0 1 0 1 1 0 1 1 1 0 1 1}%4")
+let num1 = ("{0 2 4 6 8 10}").palindrome()//.sometimesBy(mousex.range(0,1), x=>x.add(mousex.range(3,9)))
+let num2 = ("{11 9 7 5 3 1}").palindrome()//.sometimesBy(mousey.range(0,1), x=>x.add(mousey.range(3,9)))
+
+$drums: stack(
+  s("sbd").struct("<1 0 0 0 1 0 0 0 1 0 0 1 0 0 1 0>*4"),
+  s("sd").struct("<0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 >*4").lpf(mousey.range(20,5000)).pan(sine.seg(0.5).range(0,1)),
+  s("sh").struct("1 1 1 1").lpf(mousey.seg(2).range(20,5000)).room(1.25).pan(sine.seg(0.5).range(0,1))
+)
+
+$lemody: n(num1)
+  .chord(chords)
+  .voicing()
+  .transpose(0)
+  .s("sine, tri") 
+  .lpf(mousey.range(20,20000))
+  .echo(x, y, z)
+  .room(sine.range(0,1))
+  .struct(s1)
+  .pan(sine.range(0,1))
+._pianoroll()
+
+$2lemody: n(num2)
+  .chord(chords)
+  .voicing()
+  .transpose(0)
+  .s("sine, tri") 
+  .lpf(mousey.range(20,20000))
+  .echo(x, y, z)
+  .room(sine.range(0,1))
+  .struct(s2)
+  .pan(sine.range(0,1))
+  ._pianoroll()
+
+$bass: n("<0 -1 -2 -1>/16")
+  .scale(scales)
+  .transpose(-12)
+  .s("sine, square, gm_tuba")
+  .pan(sine.seg(0.5).range(0,1))
+  .room(sine.range(0,1))
