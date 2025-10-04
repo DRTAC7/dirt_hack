@@ -1,0 +1,78 @@
+//Love on a Real Train
+//Tangerine Dream
+//Coded by dirt_hack 2025.10.4
+
+setcpm(110)
+
+let riskyGain = slider(1,0,1,.01)
+let bassGain = slider(0,0,4,.01)
+let harmonyGain = slider(0,0,1,.01)
+let countermelody2001Gain = slider(0,0,1,.01)
+let countermelody2014Gain = slider(0,0,1,.01)
+let shakerGain = slider(0,0,1,.01)
+let drumsGain = slider(0,0,4,.01)
+
+let risky = ("<f4 - eb4 - f4 eb4 c4 f4 - f4 - eb4 bb3 - c4 ->*4")
+let harmony = ("<- - g4 - ab4 - c4 f4 - f4 g4 - eb4 - c4 ->*4")
+let countermelody2001 = ("<bb4 - c5 ab4 - - bb4 - - f4 - - c5 - - - ab4 bb4 - c5 - - ab4 - - bb4 - - f4 - - - c5 ab4 bb4 f4 - - c5 - - ab4 - - bb4 - - - f4 c5 ab4 bb4 - - f4 - - c5 - - ab4 - - ->*4")
+let countermelody2014 = ("<f5 - g5 - ab5 - bb5 eb5 - f5 g5 - ab5 - - - bb5 - c6 - ab5 - bb5 f5 - f5 g5 - ab5 - - - f5 - g5 - ab5 - bb5 eb5 - f5 g5 - ab5 - - - - - - - - - - - - - - - - - - ->*4")
+let bass = ("<db2 eb2 f2 - >/4")
+
+$risky: note(risky)
+.gain(riskyGain)
+.s("gm_acoustic_guitar_nylon,gm_epiano1")
+.delay(0.75)
+.delaytime(0.41)
+.color("white")
+.pitchwheel()
+
+$bass: note(bass)
+.gain(bassGain)
+.s("gm_fretless_bass,gm_epiano1")
+.rel(1.25)
+.color("red")
+.pitchwheel()
+
+$harmony: note(harmony)
+.gain(harmonyGain)
+.s("gm_acoustic_guitar_nylon,gm_epiano1")
+.delay(0.75)
+.delaytime(0.41)
+.color("black")
+.pitchwheel()
+
+$countermelody2001: note(countermelody2001)
+.gain(countermelody2001Gain)
+.s("gm_acoustic_guitar_nylon,gm_epiano1")
+.delay(0.25)
+.delaytime(0.41)
+.rel(0.5)
+.color("blue")
+.rel(0.25)
+.pitchwheel()
+
+$countermelody2014: note(countermelody2014)
+.gain(countermelody2014Gain)
+.s("gm_acoustic_guitar_nylon,gm_epiano1")
+.delay(0.5)
+.delaytime(0.41)
+.rel(.5)
+.color("yellow")
+.pitchwheel()
+
+$shaker: s("<rolandtr808_sh, sh>*4")
+.gain(shakerGain)
+.delay(0.75)
+.pan(sine.range(0,1))
+.lpf(sine.range(2000,10000).seg(.98))
+.delaytime(0.41)
+
+$drums: s("<[sbd sbd] - - - white - [- sbd] ->*2")
+.gain(drumsGain)
+.lpf(sine.range(300,20000).seg(0.98))
+.delay(0.45)
+.pan(sine.range(0,1))
+.delaytime(0.41)
+.dec(0.1)
+
+all(x => x.room(1.5)).size(0.75)
