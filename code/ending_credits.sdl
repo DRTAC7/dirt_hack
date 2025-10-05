@@ -3,6 +3,8 @@
 
 setcpm(120)
 
+let patternbuffer = slider(4,0,20,1)
+
 $drums: s("bd:7 ? snare_modern ? hh:3").struct("<1>*4")
 .velocity(sine.range(0.25,1).seg(.98))
 .rel(0.5)
@@ -17,11 +19,11 @@ $comp: note("<[db3, ab3] ? [eb3, bb3] ? [f3, c4] ? [ab3, eb4] ? [db4, ab4]>*4").
 .rel(0.1)
 .delay(0.45).dt(.75)
 .transpose("<0 12 24>")
-.lpf(sine.seg(.98).range(200,20000))
+.lpf(sine.seg(.98).range(500,20000))
 .pan(sine.seg(1.25).range(0,1))
 .color("blue")
 
-$bass: note("<f2!8 ab2!3 c2!2 db2!16>").struct("<1>*4")
+$bass: note("<db2!8 eb2!8 f2!8>").struct("<1>*4")
 .s("gm_synth_bass_1, pulse, supersaw")
 .rel(0.25)
 .color("purple")
