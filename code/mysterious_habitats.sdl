@@ -1,0 +1,39 @@
+//Mysterious Habitats by Dušan Bogdanović
+//coded by dirt_hack
+
+setcpm(140)
+
+const instrument = ("gm_acoustic_guitar_nylon")
+const release = (1)
+
+//-----Ostinato-----
+
+$one: note("<f3 g3 d3 - e3>")
+.s(instrument)
+.rel(release)
+.color("white")
+
+$two: note("<[- c3] - [- g2] g3 ->")
+.s(instrument)
+.rel(release)
+.color("blue")
+
+$three: note("<[- -] - [- -] [- a2] ->")
+.s(instrument)
+.rel(release)
+.color("green")
+
+$four: note("<[- -] - [- -] [- -] [- f2]>")
+.s(instrument)
+.rel(release)
+.color("purple")
+
+//-----Melody-----
+
+$five: note("<[c5 c5] c5 b4 - a4 - [e5 e5] e5 d5 c5 [- a4] b4 - - - - - - - -[c5 c5] c5 b4 - a4 - [e5 e5] e5 d5 c5 [- a4] b4 - - c5 c5 [d5 e5] d5 c5 b4 a4 [g4 e5] e5 d5 c5 [- a4] b4 - - - - - - - ->" )
+.s(instrument)
+.rel(release)
+.color("cyan")
+
+all (x => x.pitchwheel())
+all (x => x.pan(sine.range(0,1)))
