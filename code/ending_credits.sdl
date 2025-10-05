@@ -13,7 +13,7 @@ $shaker: s("cabasa").struct("<1>*4")
 .color("green")
 
 $comp: note("<[db3, ab3] ? [eb3, bb3] ? [f3, c4] ? [ab3, eb4] ? [db4, ab4]>*4").palindrome().struct("<1 0>*8")
-.s("gm_epiano1, gm_acoustic_guitar_steel")
+.s("gm_epiano1, gm_acoustic_guitar_steel, sine")
 .rel(0.1)
 .delay(0.45).dt(.75)
 .transpose("<0 12 24>")
@@ -21,8 +21,8 @@ $comp: note("<[db3, ab3] ? [eb3, bb3] ? [f3, c4] ? [ab3, eb4] ? [db4, ab4]>*4").
 .pan(sine.seg(1.25).range(0,1))
 .color("blue")
 
-_$bass: note("<f2!8 ab2!3 c2!2 db2!16>").struct("<1>*4")
-.s("gm_synth_bass_1, pulse")
+$bass: note("<f2!8 ab2!3 c2!2 db2!16>").struct("<1>*4")
+.s("gm_synth_bass_1, pulse, supersaw")
 .rel(0.25)
 .color("purple")
 
