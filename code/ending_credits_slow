@@ -1,0 +1,49 @@
+//Ending Credits
+//dirt_hack 2025.10.5
+
+setcpm(120)
+
+await initHydra({feedStrudel:1})
+
+src(s0).rotate( () => time%360)
+  .repeat(15)
+  .kaleid(2)
+  .out()
+
+let patternbuffer = slider(5,0,20,1)
+
+_$drums: s("bd:7 ? snare_modern ? hh:3").struct("<1>*4")
+//.velocity(sine.range(0.25,1).seg(.98))
+.rel(0.5)
+.color("cyan")
+
+_$shaker: s("shaker_small").struct("<1>*4")
+.velocity("3 1 .35")
+.gain(2)
+.color("green")
+
+$comp: note("<[db3, ab3] ? [eb3, bb3] ? [f3, c4] ? [ab3, eb4] ? [db4, ab4]>")
+.s("sine, pulse")
+.rel(0.5)
+.delay(0.45).dt(.75)
+.transpose("<-12 0 12>")
+.lpf(sine.seg(.98).range(500,20000))
+.pan(sine.seg(1.25).range(0,1))
+.gain(slider(0.614,0,2,.001))
+.color("cyan")
+
+$mel: note("<db3 ab3 eb3 - bb3 f3 - c4  - ab3 eb4 -  db4 - ab4 bb4 eb5 c5>")
+.s("gm_reed_organ,gm_fx_echoes")
+.rel(1)
+  .delay(0.75).dt(.75)
+.transpose(0)
+.color("yellow")
+
+$bass: note("<db2!16 eb2!16 f2!16>")
+.s("gm_synth_bass_1, tri,square ,supersaw")
+.rel(0.25)
+.gain(slider(0.193,0,1,.001))
+.color("purple")
+
+all(x => x.room(1))
+all(x => x.punchcard({vertical:true, flipTime:1, flipValues:1, labels:1}))
