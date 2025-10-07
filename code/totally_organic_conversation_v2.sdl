@@ -1,0 +1,56 @@
+// Totally Organic Conversation v2
+// dirt_hack 2025.10.7
+
+setcpm(120)
+
+await initHydra({feedStrudel:1})
+
+src(s0)
+  .rotate(()=>time%360)
+  .kaleid(25)
+  .out()
+
+const energy = (sine.range(500,20000).seg(0.98))
+
+one: note("<[bb3,f4]!2[c4,g4]!2 - [c4,g4][ab3,eb4] - [ab3,eb4] - [f3,c4] - [f3,c4]!2[ab3,eb4][eb3,bb4] - [c3,g4] - [c3,g4]>*4").rib(23,5)
+  .s("gm_voice_oohs, sine")
+  .transpose("<24>/2")
+  .delay(0.25).dt(.41)
+  .lpf(energy)
+  .distort(sine.range(0.5,0.85).seg(1.5))
+  .color("cyan")
+  .room(1).rsize(3)
+  .gain(slider(0,0,5,0.01))
+  .punchcard()
+
+$two: s("<bd:3 sh sh sbd sh sh sd:7 bd:3>*4")
+  .color("white")
+  .distort(1)
+  .rel(1)
+  .punchcard()
+
+hh: s("<hh:3>*4")
+
+_$three: note("<bb3 f4 c4!8 - g4 c4 - g4 - ab3!4 eb4 - ab3!3 eb4 f3  - c4 f3!2 - c4!4 - ab3 - eb4!6 eb3 - bb4!3 c3 g4 - c3 g4 - >*4")
+  .s("sine, gm_kalimba, gm_voice_oohs")
+  .transpose("<12 24>/2")
+  .lpf(energy)
+  .echo(2,0.5,2)
+  .delay(0.25).dt(0.41)
+  .room(1).size(3)
+  .pan(sine.range(0,1))
+  .color("green")
+  .gain(slider(0,0,1,0.001))
+  .punchcard()
+
+_$five: note("<ab3!16 bb3!16 c3!28 eb3!4>*4")
+  .s("pulse,gm_fretless_bass")
+  .transpose(-24,-12)
+  .gain(5)
+  .color("red")
+
+$four: note("g5, c6")
+  .s("gm_flute, gm_recorder")
+  .transpose(0)
+  .rel(1)
+  .color("pink")
