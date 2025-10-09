@@ -1,0 +1,37 @@
+setcpm(120)
+
+await initHydra({feedStrudel:1})
+
+src(s0)
+  .kaleid(H("5"))
+  .scale(H(sine.range(0.1,2).seg(1)))
+  .rotate(()=>time%360)
+  .out()
+
+let alltransform=({vertical:true, flipTime:1,smear})
+
+$three: note("<e3 - g3 - b2 - g3 c3 - g3 - d3 - g3 - d3>*2")
+  .s("gm_fretless_bass,gm_piano,gm_epiano1")
+  .transpose("-12,0,7,12,19")
+  .rel(1)
+  .room(1).size(5)
+  .color("purple")
+  .punchcard(alltransform)
+
+_$one: note("<g4 - e4 b4 g3 b3 e4 d4 c4 g4 - f#5 d5 - c5 b4>*2").palindrome()
+  .s("gm_vibraphone,gm_glockenspiel")
+  .rel(1)
+  .room(1).size(5)
+  .transpose("0,12,24")
+  .color("cyan")
+
+$two: note("<[b3,g4] - [b3,f#4] - [b3,d4] - a3 b3 - b3 - b3 d4 e4 d4 a3>*2")
+  .s("gm_ocarina,gm_celesta")
+  .rel(1)
+  .room(1).size(5)
+  .transpose("0,12,24")
+  .color("green")
+
+$sh: s("shaker_large").struct("<1 0 1 0 1 0 1 1 1 0 1 1 1 0 1 1>*2").room(1).size(5).lpf(20000).color("#FF10F0")
+$kick: s("bd:7").struct("<1 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1>*2").room(1).size(5).lpf(5000).color("blue")
+_$sn: s("sd:10").struct("<0 0 1 0 1 0 0 0 1 0 0 1 0 0 1 0>*2").room(1).size(5).lpf(5000).color("blue")
