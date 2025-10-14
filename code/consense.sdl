@@ -1,0 +1,36 @@
+setcpm(75)
+
+await initHydra({feedStrudel:1})
+
+src(s0)
+  .kaleid(3)
+  .rotate(()=>time%360)
+  .out()
+
+$one: note("<bb4 - f5 bb4 d5 a5 - f5 c6 - d5 a5 - c5 g5 a5 bb4 - f5 bb4 d5 a5 - f5 c6 - d5 a5 - c5 g5 ->*4")
+  .s("sine,gm_epiano1")
+  .transpose("<-24,-12,-17,-5,0>/2")
+  .room(1).size(3)
+  //.echo(2,1,.25)
+  .color("cyan")
+  .rel(.75)
+  .punchcard({flipTime:1,smear})
+
+$hh: s("<hh:3 hh:3 hh:5 ->*4").room(.5).size(3).delay(.35).dt(1)
+
+
+$two: note("<d5 - d5 - d5 - d5 - c5 g5 - d5 a5 - - ->*4")
+  .s("gm_acoustic_guitar_steel")
+  .room(1).size(3)
+  .rel(.75)
+  .color("pink")
+
+
+$three: note("<a5/4 c5 d6/4>*2")
+  .s("gm_flute")
+  .room(1).size(3)
+  .rel(.75)
+  .color("blue")
+
+
+
