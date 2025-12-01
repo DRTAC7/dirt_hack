@@ -1,0 +1,29 @@
+setcpm(140)
+
+$: note(`<3 -2 1 3 4 0 2 3
+          - 1 3 5 6 1 5 4
+          3 -2 1 3 4 0 2 3
+          - 1 3 5 6 1 5 4
+          3 -2 1 3 4 0 2 3
+          - 1 3 5 6 1 5 4
+          3 -2 1 3 2 -3 0 1
+          - - - - - - 2 ->*2`.sub(1))
+.scale("g:minor")
+.s("gm_piano,sine,tri")
+.transpose("0,12")
+.rel(.5)
+.dec(.4)
+.room(1)
+.color("blue")
+._punchcard()
+$bass: note("<1!4 0!4 -1!4 4!4>*2".sub(1))
+.scale("g:minor")
+.transpose("<-24 -12>*2")
+.s("gm_synth_bass_1,saw,supersaw")
+.room(1)
+.gain(1.25)
+.color("blue")
+._punchcard()
+
+$: s("<sbd [sbd,sd:7]>")
+$: s("- hh:3")
