@@ -1,0 +1,167 @@
+//   _____ _                  _      _ 
+//  / ____| |                | |    | |
+// | (___ | |_ _ __ _   _  __| | ___| |
+//  \___ \| __| '__| | | |/ _` |/ _ \ |
+//  ____) | |_| |  | |_| | (_| |  __/ |
+// |_____/ \__|_|   \__,_|\__,_|\___|_|
+//    Tech Demo - FEBRUARY 6TH, 2026
+
+// 0. Getting Started
+
+// Runs best in Google Chrome...unfortunately. Firefox 4 lyfe!
+
+// Side tab, turn on tab indention. Set other settings if so desired.
+
+// Set your tempo. I prefer to use CPM (cycles per minute) over CPS (cycles per second)
+
+  setcpm(120)
+
+// 1. Making Sound
+
+  _$: s("sbd")._scope()
+  // Use the keyboard command Option + Enter (or Ctrl + Enter on Windows) to run new code
+  // Use the keyboard command Option + . to stop all code
+
+// 2. Working in cycles 
+
+  // Cycle length is determined by the number of events
+  _$: s("sbd hh hh hh hh")
+
+  // We can define the length of the sequence by using angle brackets.
+  _$: s("<sbd hh hh hh hh>")
+
+  // [] Brackets will compact the events into a single event
+
+  _$: s("<sbd [sd sd] [- sd] [sd sd sd] [sd sd sd sd]>")
+
+// 3. Notes
+
+  // Traditional Nomenclature
+      _$: note("<c4 d4 e4 f4 g4 a4 b4 c5>*2").s("gm_piano")
+
+  // MIDI
+      _$: note("<60 62 64 65 67 69 71 72>*2").s("gm_piano")
+
+  // Scales
+      _$: note("<0 1 2 3 4 5 6 7>*2").scale("c:major").s("gm_piano")
+
+      // Computers start a 0. Musicians start at 1. So I do the following:
+
+      _$: note("<1 2 3 - 4 5 - 6 - 7 8 ->*2".sub(1)).scale("c:major").s("gm_piano")
+
+// 4. Arranging Longer Sections
+
+//setcpm(190)
+
+let magicflute = `<- - - [d5 c5] 
+          b4 g5 b5 [d5 b4] 
+          c5 a5 c6 [c5 b4] 
+          a4 f#5 a5 f#5 
+          [g5 b5][g5 b5] g5 [d5 c5]
+          b4 [d5 g5] b5 [d5 b4]
+          c5 [e5 a5] c6 [e5 c5]
+          [b4 d5] g5 [a4 d5] f#5
+          g5 [d5,b5 -] [b4,g5 -] ->`
+
+  _$: note(magicflute)
+    .s("gm_glockenspiel")
+    .rel(1)
+    .room(.5)
+    //.lpf(3000)
+    ._punchcard()
+// 4.5 Multiple Instruments, Different FX, Same Melody
+
+// Notice that I set the magic flute melody to a variable, to make my code clean
+
+_$: note(magicflute)
+    .s("gm_glockenspiel")
+    .rel(1)
+    .room(.5)
+    ._punchcard()
+_$: note(magicflute)
+    .s("gm_flute,gm_oboe,gm_recorder")
+    .dec(.1)
+    .room(.5)
+    ._punchcard()
+
+// 5. Effects
+
+//setcpm(90)
+
+  _$oldfield: n("<4 7 4 8 4 6 7 4 9 4 10 4 8 9 4 7 4 8 4 6 7 4 9 4 10 4 8 9 4 8>*4")//.rib(1,2)
+    .scale("a:minor")
+    .s("gm_piano")
+    .rel(.5)
+    //.dec(.1)
+    //.adsr(0,0,0,0)
+    .room(.7)
+    //.delay(.5).dt(.75)
+    .transpose("12")
+    .lpf(sine.range(500,20000).slow(32))
+    .color("cyan")
+    ._punchcard()
+
+// 6. Composing Serialism
+
+  _$: n("<0 1 2 3 4 5 6 7 8 9 10 11 12>*2")
+    .scale("c:chromatic")
+    .s("gm_flute")
+    .strans(12)
+    .dec(.5)
+    .rel(.3)
+    .pitchwheel()
+
+// 7. Using Samples (who is taking or has taken Dr. Frank's Intro to Electroacoustic Music?)
+
+  samples('github:DRTAC7/dirt_hack')
+  samples('github:switchangel/breaks')
+
+  _$: s("wilhelm").scrub(.6).struct("<0 0 1 0 1 0 0 0 1 0 0 1 0 0 1 0>*4").clip(.3).room(.5)
+
+//following code courtesy of Switch Angel
+
+//setcps(170/60/4) // (comment out earlier tempo)
+
+  _$: s("breaks/2").fit()
+    .scrub(irand(16).div(16).seg(8).rib("<4 20>",1))
+    .n(irand(5).rib(7,1))
+    .almostNever(ply("2 | 4"))
+    ._scope()
+// 8. Visual Feedback (is anyone sensitive to flashing lights or colors?)
+
+await initHydra({feedStrudel:1})
+
+src(s0)
+.rotate(()=>time%360)
+.kaleid(H("<3 4 5 6 25>/2"))
+.scale(.5)
+  .out()
+
+const energy = (sine.range(500,20000).slow(64))
+
+_$fifths: note("<[bb3,f4]!2[c4,g4]!2 - [c4,g4][ab3,eb4] - [ab3,eb4] - [f3,c4] - [f3,c4]!2[ab3,eb4][eb3,bb4] - [c3,g4] - [c3,g4]>*4").palindrome()
+  .s("sine,supersaw,tri")
+  .transpose("<-12, 0 12>/2")
+  .delay(0.25).dt(.41)
+  .lpf(energy)
+  .dec(.2)
+  .room(1).rsize(3)
+  .gain(slider(1,0,1,0.01))
+  .color("<cyan pink>/2")
+  .punchcard()
+
+_$drums: s("<bd:3 sh sh sbd sh sh sd:7 bd:3>*4")
+  .color("white")
+  .rel(1)
+  .punchcard()
+
+_$hh: s("<hh:3>*4")
+
+
+// 9. Resources for learning
+
+  // Right side tab of the Strudel interface
+  // nudel.cc
+  // flok.cc
+  // Switch Angel -- Chopping Breaks and Samples - -https://www.youtube.com/watch?v=dcmwqqzJubA 
+  // Official Strudel Discord -- https://discord.gg/6JN6UR6SjC
