@@ -1,7 +1,7 @@
 setcps(60/60/4)
 
 $guitar: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16"],
-                 [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16"],
+                 [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 a2 b2 g#3>*16"],
                  [1,"<c#3 g#3 c#3 g#3 e3 b3 e3 b3 a2 c#3 g#3 a2 c#3 g#3 a2 b2>*16"],
                  [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 b2 e3 a3 b3 e4 a4 b4>*16"]
                  ).note()
@@ -9,4 +9,4 @@ $guitar: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*1
   .rel(5)
   .transpose("0,12".add(2))
   //.delay(.25).dt(.75)
-  .room(1).size(5)
+  //.room(1).size(5)
