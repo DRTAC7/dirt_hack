@@ -2,13 +2,18 @@
 
 setcps(60/60/4)
 
+// let one = "<eb"
+// let two =
+// let three =
+// let four =
+
 $guitar: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16"],
                  [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 a2 b2 g#3>*16"],
                  [1,"<c#3 g#3 c#3 g#3 e3 b3 e3 b3 a2 c#3 g#3 a2 c#3 g#3 a2 b2>*16"],
                  [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 b2 e3 a3 b3 e4 a4 b4>*16"]
                  ).note()
   .s("gm_electric_guitar_jazz")
-  .rel(5)
+  .rel(1)
   .transpose("0,12".add(2))
   //.delay(.25).dt(.75)
   .room(1).size(5) 
@@ -19,7 +24,7 @@ $flute: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16
                  [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 b2 e3 a3 b3 e4 a4 b4>*16"]
                  ).note()
   .degradeBy(.9)
-  .s("gm_flute,gm_vibraphone")
+  .s("gm_flute,gm_vibraphone,gm_music_box")
   .rel(5)
   .transpose("12".add(2))
   .room(1).size(5) 
@@ -30,10 +35,10 @@ $oboe: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16"
                  [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 b2 e3 a3 b3 e4 a4 b4>*16"]
                  ).note()
   .degradeBy(.5)
-  .s("gm_oboe,gm_clarinet")
+  .s("gm_oboe,gm_clarinet,gm_blown_bottle")
   .dec(.1)
   .transpose("12".add(2))
-  .gain(1.5)
+  .gain(1.25)
   .room(1).size(5)
 
 $glock: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16"],
@@ -46,3 +51,16 @@ $glock: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16
   .rel(.6)
   .transpose("24".add(2))
   .room(1).size(5)
+
+$bass: arrange([1,"<c#3 g#4 c#4 g#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 e3 b2 g#3>*16"],
+                 [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 c#3 g#3 a2 c#3 a2 b2 g#3>*16"],
+                 [1,"<c#3 g#3 c#3 g#3 e3 b3 e3 b3 a2 c#3 g#3 a2 c#3 g#3 a2 b2>*16"],
+                 [1,"<c#3 g#3 c#3 c#3 e3 b3 e4 e2 a2 b2 e3 a3 b3 e4 a4 b4>*16"]
+                 ).note()
+  .struct("<1 0 0 1 0 0 1 1>*16")
+  .s("gm_fretless_bass,gm_slap_bass_1")
+  .rel(.4)
+  .transpose("-24,-12".add(2))
+  .room(1).size(5)
+
+$: s("<sh>*8").struct("<1 0 1 1>*16")
