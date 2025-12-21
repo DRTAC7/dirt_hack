@@ -1,6 +1,6 @@
 setcpm(90)
 
-_$: s("sh").fast(2)
+$: s("sh").fast(2)
 
 const go = [
   "[f3,e4] -",
@@ -17,6 +17,7 @@ $score: note(`1 2 2 3 3 1 1 2 3
               3 1 5 6 2 5 5 4 6 2 2 6
               `.stepBind(x => go[x -1]))
                .pace(2)
-               .s("gm_marimba,gm_glockenspiel")
+               .layer(x => x.s("gm_marimba"),
+                      x => x.s("gm_glockenspiel").add(note(12))                         
+                     )
                .room(1)
-               .rel(.3)
