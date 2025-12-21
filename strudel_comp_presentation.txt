@@ -4,7 +4,7 @@
 //  \___ \| __| '__| | | |/ _` |/ _ \ |
 //  ____) | |_| |  | |_| | (_| |  __/ |
 // |_____/ \__|_|   \__,_|\__,_|\___|_|
-//    Tech Demo - FEBRUARY 6TH, 2026    Version: 2025.12.1
+//    Tech Demo - FEBRUARY 6TH, 2026    Version: 2025.12.21
 
 // 0. Getting Started
 
@@ -70,9 +70,10 @@ let magicflute = `<- - - [d5 c5]
     .room(.5)
     //.lpf(3000)
     ._punchcard()
-// 4.5 Multiple Instruments, Different FX, Same Melody
+// 4.25 Multiple Instruments, Different FX, Same Melody
 
-// Notice that I set the magic flute melody to a variable, to make my code clean
+// First I set the magic flute melody to a variable, to make my code clean
+// ..and then you could do something like this:
 
 _$: note(magicflute)
     .s("gm_glockenspiel")
@@ -84,7 +85,14 @@ _$: note(magicflute)
     .dec(.1)
     .room(.5)
     ._punchcard()
-// 4.75 The arrange() function
+// But it is more efficient to do this:
+
+_$: note(magicflute)
+  .layer(x => x.s("gm_glockenspiel").rel(1).room(.5),
+         x => x.s("gm_flute, gm_oboe, gm_recorder").dec(.1).room(.5)
+        )
+  ._punchcard()
+// 4.5 The arrange() function
 
 //setcps(140/60/4/2)
 
@@ -115,6 +123,36 @@ _$bass: note("<1!4 0!4 -1!4 4!4>*16".sub(1))
 _$: s("<sbd [sbd,sd:7]>*8")
 
 _$: s("<- hh:3>*16")
+
+// 4.75 More complicated arrnaging and playing "cycles over barlines"
+// Special thanks to Alex Mclean (yaxu) for help on this
+// https://en.wikipedia.org/wiki/Alex_McLean
+// https://github.com/YAXU
+
+//setcpm(90)
+
+_$: s("sh").fast(2)
+
+const go = [
+  "[f3,e4] -",
+  "[f3,e4] [a3,c4] -",
+  "[f3,e4] [a3,c4] [g3,d4] -",
+  "[f3,e4] [g3,d4] [b3] [a3,c4] -",
+  "[f3,e4] [g3,d4] [b3] [a3,c4] [d3,g4] -",
+  "[f3,e4] [g3,d4] [b3] [a3,c4] [d3,g4] [e3, f4] -"
+]
+
+_$score: note(`1 2 2 3 3 1 1 2 3 
+              1 2 4 3 1 4 1 4 2 1 3 1 3 4 1 3 
+              4 1 1 3 5 2 1 4 3 2 1
+              3 1 5 6 2 5 5 4 6 2 2 6
+              `.stepBind(x => go[x -1]))
+               .pace(2)
+               .layer(x => x.s("gm_marimba"),
+                      x => x.s("gm_glockenspiel").transpose(24).rel(1),  
+                      x => x.s("gm_acoustic_guitar_nylon").transpose("0,12").rel(.7)
+                     )
+               .room(1)
 
 // 5. Effects
 
