@@ -1,0 +1,8 @@
+setcpm(120)
+
+await initHydra({feedStrudel:1})
+
+src(s0)
+  .kaleid(5)
+  .rotate(()=>time%360)
+.out()

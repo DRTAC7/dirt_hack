@@ -1,0 +1,30 @@
+// large simple open form piece in sections
+
+setcpm(50)
+
+// I
+
+_$: note("<d4 e4 b4 g4 a4 d5>")
+  .degradeBy(.6)
+  .s("gm_flute,gm_vibraphone,gm_oboe")
+  .rel(1)
+  .transpose("0")
+  .room(1).size(5)
+
+// II
+
+$treble: note(`<e3 b3 e4 b3 g3 d4 g4 d4 c3 e3 b3 c3 e3 b3 e3 g3>*4`)            
+  .s("gm_electric_guitar_jazz")
+  .rel(1)
+  .transpose("0,12")
+  .room(1).size(5) 
+
+$bass: note(`<e2 - - e2 g2 - - g2 c2 - - c2 - - d2 g2>*4`)
+  .s("gm_electric_bass_finger,gm_electric_bass_pick")
+  .rel(1)
+  .transpose("-12,0")
+  .room(1).size(5)
+
+$arp: note("<")
+
+
