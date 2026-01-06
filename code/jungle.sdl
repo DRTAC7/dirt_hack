@@ -1,0 +1,38 @@
+setcpm(120)
+
+_$: s("<sh!3 sd:7 hh:3!2 sh!5 sd:7 sbd sh!3>*4").room(.2).gain(1.12)
+_$: s("<hh:4, shaker_large, shaker_small>").struct("<1 0 1 1>*4")
+_$: s("sbd,bd:3").struct("<1 0 0 0 1 0 0 0 1 0 0 1 0 0 1 0>*4")
+
+$: n("<1 11 7 - 5 - 3 8 - 4 5 10 4 12 5>*4".sub(1))
+  .scale("a:minor")
+  .transpose("0,7".sub("0"))
+  .layer(
+    x => x.s("gm_electric_guitar_jazz").dec(.5),
+    x => x.s("gm_epiano1").rel(.5),
+    x => x.s("gm_marimba")
+    )
+.room(.5)
+.delay(.5).dt(.5)
+//.echo(2,.5,.5)
+
+_$: n("<1 - 5 3 4 2 0 7>*4".sub(1)).scale("a:minor")
+  .transpose("12,24".sub(12))
+  .layer(
+    x => x.s("gm_glockenspiel,gm_piano").dec(.1),
+    x => x.s("gm_flute,gm_oboe").dec(.5),
+    x => x.s("supersaw").rel(.5).transpose(24)
+  )
+.gain(1.15)
+.delay(1).dt(.5)
+.room(1)
+
+_$: n("<1!32 -2!32 -1!32 0!32>*4".sub(1))
+  .scale("a:minor")
+  .transpose("-24,-12")
+  .layer(
+    x => x.s("sqr").dec(.3),
+    x => x.s("sine,gm_synth_bass_2").dec(.3)
+    )
+  .room(.5)
+  .lpf(sine.range(500,10000).slow(32))
