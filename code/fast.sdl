@@ -1,0 +1,38 @@
+setcpm(75)
+
+
+
+const go = [
+  "<bb4>*4",
+  "<f#4>*4",
+  "<db4>*4",
+  "ab4"
+]
+
+let arp = "<bb5 c6 db6 f#6 g#6>"
+
+_$: note(arp).fast(8).s("gm_electric_guitar_jazz,gm_flute").room(1).size(5).sometimes(transpose(12)).room(1).size(5)
+_$: note(arp).fast(4).s("gm_electric_guitar_clean,gm_oboe").transpose(-12).sometimes(transpose(12)).room(1).size(5)
+
+$: note(pick(`<0!16 1!16 2!16 3!16>*4`,go)).sometimes(transpose(24)).struct("<1>*8")
+.layer(
+    x => x.s("pulse,tri,gm_kalimba").dec(.1),
+    x => x.s("gm_synth_bass_1").dec(.1)
+  )
+.room(1).size(5)
+.transpose("0,7".sub(24))
+
+$: note("<bb4!32 f#4!32 db4!32 ab4!32>*8").often(transpose("12")).degradeBy(.5)
+  .layer(
+    x => x.s("sine").dec(.1),
+    x => x.s("gm_epiano1,gm_piano").dec(.1).transpose("-24,-12")
+  )
+.room(1).size(5)
+.transpose("0,7")
+
+const drums = [
+  "sbd","sd:7","sh","hh:2","hh:3"
+]
+
+$: s(pick(irand(5),drums)).degradeBy(.1).fast(8).lpf(sine.range(10000,20000).slow(32)).gain(1.25)
+$: s("bd:2").fast(2)
