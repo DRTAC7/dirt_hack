@@ -1,0 +1,9 @@
+$continuate: note(`<b3 - - b3 - - b3 - 
+          f#4 - - f#4 - - f#4 -
+          g3 - - g3 - - g3 - 
+          d4 - - d4 - - d4 - 
+          e3 - - e3 - - e3 - - e3 - - e3 - d3 -
+          e3 - - e3 - - e3 - - e3 - - e3 - d3 ->*4`)
+  .s("sine,tri,supersaw").dec(.2)
+  .transpose("-24,0,7")
+  .room(1).size(3)
