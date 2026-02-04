@@ -4,7 +4,8 @@
 //  \___ \| __| '__| | | |/ _` |/ _ \ |
 //  ____) | |_| |  | |_| | (_| |  __/ |
 // |_____/ \__|_|   \__,_|\__,_|\___|_|
-//    Tech Demo - FEBRUARY 6TH, 2026    Version: 2026.2.4
+//
+// Tech Demo   FEBRUARY 6TH, 2026   Version: 2026.2.4
 
 // 0. Getting Started
 
