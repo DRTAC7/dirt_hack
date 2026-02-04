@@ -4,7 +4,7 @@
 //  \___ \| __| '__| | | |/ _` |/ _ \ |
 //  ____) | |_| |  | |_| | (_| |  __/ |
 // |_____/ \__|_|   \__,_|\__,_|\___|_|
-//    Tech Demo - FEBRUARY 6TH, 2026    Version: 2025.12.21
+//    Tech Demo - FEBRUARY 6TH, 2026    Version: 2026.2.4
 
 // 0. Getting Started
 
@@ -124,7 +124,7 @@ _$: s("<sbd [sbd,sd:7]>*8")
 
 _$: s("<- hh:3>*16")
 
-// 4.75 More complicated arrnaging and playing "cycles over barlines"
+// 4.75 More complicated arranging and playing "cycles over barlines"
 // Special thanks to Alex Mclean (yaxu) for help on this
 // https://en.wikipedia.org/wiki/Alex_McLean
 // https://github.com/YAXU
@@ -198,33 +198,46 @@ _$score: note(`1 2 2 3 3 1 1 2 3
     ._scope()
 // 8. Visual Feedback (is anyone sensitive to flashing lights or colors?)
 
+setcpm(120)
+
 await initHydra({feedStrudel:1})
 
 src(s0)
-//.rotate(()=>time%360)
-//.kaleid(H("<3 4 5 6 25 6 5 4>/2"))
-//.scale(.5)
+// .rotate(()=>time%360)
+// .kaleid(H("<3 4 5 6 25 6 5 4>/2"))
+// .scale(.5)
+//   .blend(shape(H("<3 4 5 25>")).rotate(.5,-.3))
+//  .blend(voronoi(10,5))
+// .scale(.25)
   .out()
+
+let vol = slider(0,0,1,0.01)
 
 const energy = (sine.range(500,20000).slow(64))
 
 _$fifths: note("<[bb3,f4]!2[c4,g4]!2 - [c4,g4][ab3,eb4] - [ab3,eb4] - [f3,c4] - [f3,c4]!2[ab3,eb4][eb3,bb4] - [c3,g4] - [c3,g4]>*4").palindrome()
-  .s("supersaw,gm_piano")
-  .transpose("<-12, 0 12>/2")
+  .rib(3,1)
+  // .sometimes(transpose(12))
+  .layer(
+   // x => x.s("supersaw"),
+    x => x.s("<pulse gm_voice_oohs sine tri>*6")
+  )
+  .transpose("<-12, 0 12>/2") // add ,19 at some point
   .delay(0.25).dt(.41)
   .lpf(energy)
   .dec(.2)
   .room(.7)
-  .gain(slider(1,0,1,0.01))
-  .color("<cyan pink>/2")
+  .gain(vol)
+  .color("<cyan pink white>/2")
   .punchcard()
 
 _$drums: s("<bd:3 sh sh sbd sh sh sd:7 bd:3>*4")
-  .color("<white blue>/2")
+  .color("<red orange green blue indigo violet>*4")
   .rel(1)
+  .gain(vol)
   .punchcard()
 
-_$hh: s("<hh:3>*4")
+_$hh: s("<hh:3>*4").gain(vol)
 
 // 9. Resources for learning
 
