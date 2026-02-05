@@ -199,7 +199,7 @@ _$score: note(`1 2 2 3 3 1 1 2 3
     ._scope()
 // 8. Visual Feedback (is anyone sensitive to flashing lights or colors?)
 
-setcpm(120)
+//setcpm(120)
 
 await initHydra({feedStrudel:1})
 
