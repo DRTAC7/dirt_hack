@@ -1,0 +1,22 @@
+setcpm(130)
+
+$: s("<sh>*4").velocity("<1 .5>*4")
+$: s("hh:3").fast(4)
+_$: s("sbd") .struct("<1 0 0 0>*4")
+_$: s("sd:6").struct("<0 0 1 0>*2").room(1)
+
+_$: note("<g2!32 a2!32 e2!64>*4").struct("<1 1 1 1 0 1 1 1>*4").room(1).s("sine,supersaw")
+  .dec(.1).fm(sine.range(2,7).slow(12)).trans("-12,0,7")
+
+$: note("<d3 e3 - e3 - b2 d3 e3 f#3 d3 b2 a2 d3 e3 - e3 - b2 d3 e3 f#3 d3 - a2>*4").almostNever(trans(12))
+  .layer(
+    x => x.s("sine,supersaw").dec(.2),
+   x => x.s("gm_marimba").dec(.1)
+  )
+.room(1)
+.trans("0,12,24,7,31")
+.fm(slider(0,0,7,.001))
+.delay(.5).dt(slider(0.915,0,2,.001))
+.rib(1,4)
+.gain(slider(0,0,1,.0001))
+

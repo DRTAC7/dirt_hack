@@ -1,0 +1,43 @@
+setcpm(120)
+
+let master = slider(0.405)
+
+$: n("<1 2 3 5 7>".sub(1)).fast(4).s("gm_piano,gm_orchestral_harp").scale("g:minor").transpose("19").room(.5).dec(.7).rel(.3).jux(rev).gain(master)
+
+_$: n("<3 - - 3 - - 3 - - 3 - - 3 - - 3 4 - - 4 - - 4 - 5 - - 5 - - 7 ->".sub(1))
+  .fast(4)
+  .s("sine,gm_epiano1,gm_electric_guitar_jazz,sqr,supersaw")
+  .scale("g:minor")
+  .transpose("-24,-12,-5")
+  .room(.5)
+  .dec(0.2)
+  .rel(slider(1,0,1,.01))
+  .gain(master)
+
+let drums = ["sbd","hh:3","hh","sd:7","shaker_small","cp"]
+
+$: s(pick(irand(6),drums)).fast(4).room(.5).gain(master)
+
+_$: s("sbd").room(.5).struct("<1 0 0 0 1 0 1 0 1 0 1 1 0 1 0 0>*4")
+.gain(master)
+
+let hihat = ["hh","hh:1","hh:2","hh:3"]
+_$: s(pick(irand(4),hihat)).fast(4).struct("<1!4 0!2 1 0>*4")
+.gain(master)
+
+_$: n("<5 - - 5 - - 5 - - 7 - - 7 - - 7 1 - - 1 - - 1 - - 2 - - 2 - - 2>".sub(1))
+  .fast(4)
+  .s("tri,gm_voice_oohs,sine,gm_electric_guitar_clean")
+  .scale("g:minor")
+  .transpose("0")
+  .room(.5)
+  .rel(slider(0.42,0,1,.01))
+.gain(master)
+
+$: note("<d5 - - d5 - - d5 - - f5 - - e5 - c5 - g4 - - g4 - - f4 - - a4 - - a4 - e5 ->")
+.fast(4)
+  .s("tri,gm_voice_oohs,sine,gm_electric_guitar_clean,supersaw")
+  .transpose("-12")
+  .room(.5)
+  .rel(slider(1,0,1,.01))
+.gain(master)

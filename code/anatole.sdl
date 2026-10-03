@@ -1,0 +1,42 @@
+setcpm(120)
+
+await initHydra()
+
+voronoi(25,10,10).rotate(2,.5).color(4).blend(osc()).out()
+
+let drums = ["sbd","hh","hh:3","sd:7","sd:6"]
+
+_$: s(pick(irand(5),drums)).fast(4).room(.5).gain(.5).degradeBy(.4)
+
+$: s("sbd").struct("<1 0 0 0 1 0 0 1 0 1 0 0 0 1 1 0>*4").room(.75)
+
+$: note("<bb4 c5 f5 ab6 db5>*4")
+.layer(
+  x => x.s("supersaw").lpf(400),
+  x => x.s("gm_piano,gm_glockenspiel").transpose("19,0").lpf(sine.range(400,5000).slow(64)).rel(1).gain(.75)
+)
+.room(1)
+.echo(2,.75,.5)
+.pan(rand)
+
+let notz = "<bb4 c5 db5 f5 ab5 bb6 ab6 f5 db5 c5>"
+
+$: note(notz).fast(4)
+.layer(
+  x => x.s("sine,gm_flute").lpf(400),
+  x => x.s("gm_epiano1,gm_vibraphone").transpose(-12).rel(.75),
+  x => x.s("gm_glockenspiel").rel(1).transpose(12)
+)
+.room(1)
+.degradeBy(.5)
+.almostNever(transpose("<0 12 -12>"))
+
+
+$: note("<bb2@4 ab2@4 gb2@4 ab2@4>")
+.s("sine,tri")
+.room(1)
+.transpose("0,12")
+
+
+
+

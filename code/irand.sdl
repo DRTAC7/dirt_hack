@@ -1,0 +1,28 @@
+setcpm(120)
+
+let drums= ["hh","hh:3","sh","sd:7","sbd"]
+
+$: s("bd:3")
+
+$: s(pick(irand(5),drums)).fast(4).lpf(sine.range(500,10000).slow(64)).room(.5)
+
+$: n("<1!8 3!8 -1!8 0!8>*4".sub(1).almostNever(add(7))).struct("<1 0 0 1 0 0 1 0>*4")
+  .scale("e:minor")
+  .s("gm_piano,supersaw,gm_kalimba")
+  .room(.5)
+  .dec(.4)
+  .rel(.6)
+  .transpose("-12,-5,0,7")
+.gain(slider(1.26,0,3,.01))
+
+let rittim = ["2","4","1"]
+
+$: n(irand(3).seg(pick(irand(3),rittim)).sub(1))
+  .degradeBy(saw.range(.1,.75).slow(32))
+  .scale("<e:minor e:minor:pentatonic>*4")
+  .s("gm_epiano1,gm_piano,gm_flute,gm_electric_guitar_jazz,gm_voice_oohs,gm_glockenspiel")
+  .room(.5).dec(.3).rel(slider(1,0,1,.01))
+  .gain(slider(3,0,3,.01))
+  .transpose("<0 12>/3")
+.color("cyan")
+._punchcard()

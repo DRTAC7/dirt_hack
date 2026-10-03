@@ -1,0 +1,43 @@
+setcpm(120)
+
+let xero = "<g5 f#5 e5 d5 e5 f#5>"
+
+let one = "<e4 b3 f#4 g4 e4 b3 e3>"
+let two = "<d4 a3 e4 f#4 d4 a3 d3>"
+let three = "<c4 g3 d4 e4 c4 g3 c3>"
+
+$: arrange(
+  [7, one],
+  [7, two],
+  [14, three]
+)
+  .note().fast(2)
+  .layer(
+    x => x.s("sine").dec(1.25)
+  )
+  
+.room(1)
+.fm(sine.range(0,3).slow(64))
+.transpose("-5")
+//.flux(rev)
+.delay(.5).dt(.75)
+.gain(slider(0,0,1,.001))
+.color("<blue@7 cyan@7 white@7>*7")
+._pianoroll()
+
+
+_$: note("<b3>*2").struct("<0 1 1 1>*4")
+.room(1)
+.s("sine,supersaw")
+.trans("-12,0,7").trans(-12).almostNever(trans(12))
+.dec(.2)
+.trans("<0@4 3@4 -2@4 -4@4>")
+.fm(3)
+
+_$: s("<shaker_small>").struct("<1>").fast(2).velocity("<1 .5>*2").room(.5)
+_$: s("sbd").struct("<1 0 0 0>").fast(4)
+_$: s("cp,sd:7").struct("<1>")
+_$: s("hh,hh:3").struct("<1>").fast(4)
+
+let drums = ["shaker_small","sh","hh:3","bd","cp","sd:6"]
+_$: s(pick(irand(6),drums)).fast(4).room(.5)
