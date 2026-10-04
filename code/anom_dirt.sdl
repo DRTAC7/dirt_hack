@@ -1,0 +1,43 @@
+setcpm(100)
+
+_$kick: s("sbd").struct("<1 0 1 1 0 1 0 0 1 1 0 0>*4")
+_$hat: s("hh:3,sh").fast(4).sometimes(ply(2)).room(1)
+$clap: s("crow").slow(32).room(5).delay(.5).dt(.75).gain(3)
+
+_$arp: note("<c4 a4 bb4 c4 g5 a4 bb4 c4 bb4 f4>*2").sometimes(ply(2)).almostNever(trans(12))
+.s("supersaw,tri,saw").focus(1/4, 3/4)
+.room(2)
+.dec(slider(0.478,.1,1,.001))
+.trans("<-12,0,12>*2")
+.fm(saw.range(2.5,4.5).slow(32))
+
+_$bass: note("<bb2 c2 bb2 c2 -!3>").fast(4)
+.s("supersaw,tri")
+.fm(sine.range(5,10).fast(4))
+.trans("0,12")
+.almostNever(ply(2))
+.dec(.1)
+
+_$fifth: note("<g4 g4>").sometimes(fast(4)).chorus(.5).almostNever(trans(12))
+.s("gm_voice_oohs,gm_epiano1,gm_marimba")
+.fm(4)
+.room(2)
+.trans("0,7").trans("<0@2.5 -4@2.5 -2@2.5 -7@5>").trans("-12")
+.dec(.2)
+.flux(rev)
+
+_$slap: note("<c2 g2>").fast(4).struct("<1>*4")
+.s("gm_slap_bass_1,saw")
+.gain(3)
+.trans("<0@2.5 -4@2.5 -2@2.5 -7@5>")
+
+_$newthing: note("<c4 bb4 a5 c4 f5>").sometimes(fast(2 | 3 | 4)).chorus(.8)
+.s("gm_blown_bottle,gm_voice_oohs,sine")
+.trans("<0 12 0 -12>").trans("0,12")
+.delay(.5).dt(slider(1.79,0,2,.001))
+.fm(3)
+
+$newerthing: note("<a4 c4 bb4 g5>")
+.trans("-12,0")
+.s("gm_tubular_bells")
+.room(1)
