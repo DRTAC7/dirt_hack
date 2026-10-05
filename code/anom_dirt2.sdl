@@ -1,0 +1,74 @@
+setcpm(140)
+
+let sc = "a:minor"
+let deccy = (sine.range(.1,1).slow(32))
+let deets = slider(0.71,0,3,.001)
+let mfs = "gm_slap_bass_1,sine,gm_electric_guitar_jazz,gm_glockenspiel"
+let mos = "sine"
+
+_$: n("<1 - [2,5] 7 3 - 1 [2,7] 9 [3,7] 13 1 [2,5] 15 [3,5] ->*4")
+.scale(sc)
+.s("sine,supersaw")
+.dec(1)
+.room(1)
+.flux(rev)
+.trans("0,12")
+
+_$: n("<5 4 3 2 3 4>").fast(4)
+.scale(sc)
+.s("tri,sine,sqr")
+.room(1)
+.dec(.4)
+.fm(sine.range(0,25).slow(12))
+.pan(sine.range(0,1).slow(12))
+.lpf(slider(959,400,1000,1))
+
+_$: n("<-1>").struct("<1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0>").fast(4)
+.scale(sc)
+.s("supersaw,tri,sine")
+.trans("0,7").trans("<-9@8 -7@8 -5@16>")
+.room(1)
+.dec(slider(1,.1,1,.001))
+.fm(slider(0,0,5,.001))
+.delay(.75).dt(deets)
+
+_$: s("sh,shaker_large")
+_$: s("sbd").struct("<1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0>").fast(4)
+_$: s("<shaker_small>").fast(2)
+_$: s("<- - sd:7 ->*2").room(3)
+_$: s("hh:3").struct("<1>").fast(4).velocity("<1 .75 .5 .25>*4")
+
+_$: n("<[10 7 5 2]>")
+.scale(sc)
+.s("gm_dulcimer")
+.room(1)
+.trans(0,12)
+
+$: n("<3 - - 7 - - 2 - - 6 - - 1 - - 5 - - 1 - - 5>*4")
+.s(mos)
+.trans("-24,-12")
+.scale(sc)
+.room(1)
+.fm(sine.range(0,5).slow(128))
+.dec(.1)
+.delay(.5).dt(.75)
+.pan(rand)
+
+$: n("<- 7 - - 5 - - 4 - - 5 - - 9 - - 7 - - 11 - ->*4")
+.scale(sc)
+.s(mos)
+.trans("-12,12")
+.fm(sine.range(0,5).slow(64))
+.dec(.1)
+.room(1)
+.delay(.5).dt(.75)
+.pan(rand)
+
+_$: n("<3@4 2@4>").fast(4)
+.scale(sc)
+.s("gm_cello,gm_synth_choir")
+.trans(-12,12,24)
+.room(2)
+
+
+
